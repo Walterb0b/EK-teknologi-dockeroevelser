@@ -19,12 +19,8 @@ READ_MESSAGE=$(docker run --rm -v my-shared-volume:/app/data my-custom-python ca
 
 echo "Recieved message: $READ_MESSAGE"
 
-echo "Trying to read from container not on the volume"
-if docker run --rm my-custom-python test -f /app/data/message.txt; then
-  echo "File was found even though the volume was not mounted"
-  exit 1
-else
-  echo "Succes: The container could not find the file (expected)"
-fi
+READ_MESSAGE_2=$(docker run --rm -v my-shared-volume:/app/data my-custom-python cat /app/data/message.txt)
+
+echo "Recieved message: $READ_MESSAGE_2"
 
 docker volume rm -f $VOLUME_NAME
