@@ -9,10 +9,10 @@ docker volume rm -f $VOLUME_NAME 2>/dev/null || true
 docker volume create "my-shared-volume"
 
 echo "Container writing message"
-docker run --rm -v $VOLUME_NAME:/data python:alpine sh -c "echo '$MESSAGE' > /data/message.txt"
+docker run --rm -v my-shared-volume:/data python:alpine sh -c "echo '$MESSAGE' > /data/message.txt"
 
 echo "Reading message from volume"
-READ_MESSAGE=$(docker run --rm -v $VOLUME_NAME:/data python:alpine cat /data/message.txt)
+READ_MESSAGE=$(docker run --rm -v my-shared-volume:/data python:alpine cat /data/message.txt)
 
 echo "Recieved message: $READ_MESSAGE"
 
