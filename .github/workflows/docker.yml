@@ -5,31 +5,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            
+            - name: Run image.sh (first time)
+              run: bash image.sh
 
-            - name: Build image
-              run: docker build -t my_custom_python .
+            - name: Run image.sh (second time)
+              run: bash image.sh
 
-            - name: Run container in background 
-              run: docker run -d --name my-python-app -p 8080:8000 my_custom_python
-
-            - name: Wait for server and test with curl
-              run: |
-                sleep 3
-                docker logs my-python-app
-                curl --retry 5 --retry-connrefused --retry-delay 1 http://localhost:8080
-
-            - name: Stop and remove container on port 8080
-              if: always()
-              run: docker rm -f my-python-app
-
-            - name: Run container on port 9090
-              run: docker run -d --name my-python-app-9090 -p 9090:8000 my_custom_python
-
-            - name: Test with port 9090
-              run: |
-                sleep 2
-                curl http://localhost:9090
-
-            - name: Stop and remove container on port 9090
-              if: always()
-              run: docker rm -f my-python-app-9090
