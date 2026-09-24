@@ -6,7 +6,7 @@ VOLUME_NAME="my-shared-volume"
 MESSAGE="Hello from container"
 
 docker volume rm -f $VOLUME_NAME 2>/dev/null || true
-docker volume create $VOLUME_NAME
+docker volume create "my-shared-volume"
 
 echo "Container writing message"
 docker run --rm -v $VOLUME_NAME:/data python:alpine sh -c "echo '$MESSAGE' > /data/message.txt"
