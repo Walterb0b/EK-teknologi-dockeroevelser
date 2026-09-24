@@ -11,4 +11,7 @@ jobs:
 
             - name: Run image.sh (second time)
               run: bash image.sh
+            
+            - name: Run volume.sh
+              run: bash volume.sh
 
