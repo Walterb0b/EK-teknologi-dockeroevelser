@@ -4,11 +4,7 @@ set -e
 
 CONTAINER_NAME="nginx-container"
 #Check for running container
-if[ "$(docker ps -aq -f name=^/${CONTAINER_NAME})" ]; then
-  echo "Removing existing container"
-  docker rm -f $CONTAINER_NAME
-fi
 
-echo "Starting nginx-container"
+docker rm -f $CONTAINER_NAME 2>/dev/null || true
+
 docker run -d --name $CONTAINER_NAME -p 80:80 nginx:latest
-
