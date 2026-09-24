@@ -5,6 +5,18 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - run: docker run hello-world
+
+            - name: Build image
             - run: docker build -t my_custom_python .
-            - run: bash container.sh
+
+            - name: Run container in background 
+            - run: docker run -d --name my-python-app -p 8080:8000 my_custom_python
+
+            - name: Wait for server and test with curl
+            - run: |
+                sleep 2
+                curl http://localhost:8080
+
+            - name: Stop and remove container
+              if: always()
+              run: docker rm -f my-python-app
