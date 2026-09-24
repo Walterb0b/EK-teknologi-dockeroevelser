@@ -15,7 +15,7 @@ docker run -d --name $CONTAINER_NAME -p $PORT:8000 my-custom-python
 
 echo "Curl localhost"
 sleep 2
-docker exec curl http://localhost:$PORT
+curl http://localhost:$PORT
 
 echo "Remove the container"
 docker rm -f $CONTAINER_NAME
