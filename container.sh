@@ -4,7 +4,7 @@ set -e
 
 CONTAINER_NAME="nginx-container"
 
-if["$(docker ps -aq -f name=^/${CONTAINER_NAME})"]; then
+if[ "$(docker ps -aq -f name=^/${CONTAINER_NAME})" ]; then
   echo "Removing existing container"
   docker rm -f $CONTAINER_NAME
 fi
