@@ -8,3 +8,5 @@ CONTAINER_NAME="nginx-container"
 docker rm -f $CONTAINER_NAME 2>/dev/null || true
 
 docker run -d --name $CONTAINER_NAME -p 80:80 nginx:latest
+
+ls -a /usr/share/nginx/html
