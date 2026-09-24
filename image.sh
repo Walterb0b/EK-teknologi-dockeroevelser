@@ -11,7 +11,7 @@ docker build -t my-custom-python .
 docker rm -f $CONTAINER_NAME 2>/dev/null || true
 
 echo "Running container"
-docker run -d --name $CONTAINER_NAME -p $PORT:8000 my-custom-python
+docker run -d --name $CONTAINER_NAME -p 8080:8000 my-custom-python
 
 echo "Curl localhost"
 sleep 2
